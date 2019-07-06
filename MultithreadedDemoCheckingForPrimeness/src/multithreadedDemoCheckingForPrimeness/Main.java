@@ -11,30 +11,34 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		demo();
+		// final long aPrimeNumber = 2764787846358431197L; // This takes forever on the single-threaded path
+		// final long aPrimeNumber = 10000019L;
+		final long aPrimeNumber = 5915587277L;
+		// final long aPrimeNumber = 100123456789L;
+		demo(true, aPrimeNumber);
 	}
 
-	public static void demo() {
+	public static void demo(Boolean runSingleThreadedExample, long aPrimeNumber) {
 
-//		final long aPrimeNumber = 2764787846358431197L;
-//		final long aPrimeNumber = 5915587277L;
-		final long aPrimeNumber = 100123456789L;
-		long startTime = System.currentTimeMillis();
-		Boolean thisPartIsPrime = true;
-		for (long i = 3; i <= aPrimeNumber; i += 2) {
-			if (aPrimeNumber % i == 0) {
-				thisPartIsPrime = false;	// We found a divisor. The number is not prime. Give up. Sigh.
-				break;
-			}			
+		long startTime, endTime;
+		long limit = aPrimeNumber / 2;		// There is a better way to optimize this upper bound
+		if (runSingleThreadedExample) {
+			startTime = System.currentTimeMillis();
+			Boolean thisPartIsPrime = true;
+			for (long i = 3; i <= limit; i += 2) {
+				if (aPrimeNumber % i == 0) {
+					thisPartIsPrime = false; // We found a divisor. The number is not prime. Give up. Sigh.
+					break;
+				}
+			}
+			endTime = System.currentTimeMillis();
+			System.out.println("Result = " + thisPartIsPrime + ", Single threaded: Total execution time: "
+					+ (endTime - startTime) + " milliseconds.");
 		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("Result = " + thisPartIsPrime + ", Single threaded: Total execution time: " + (endTime - startTime) + " milliseconds.");
-
 		// Try it with however many cores are available.
 		System.out.println("This machine has " + getNumberOfCores() + " cores.");
 		ArrayList<PrimessThread> primenessThreads = new ArrayList<PrimessThread>();
 		int numberOfCores = getNumberOfCores() - 2;
-		long limit = aPrimeNumber / 2;
 		long increment = limit / numberOfCores;
 		long start, end;
 		start = 3;
@@ -43,7 +47,9 @@ public class Main {
 			primenessThreads.add(new PrimessThread(i + 1, aPrimeNumber, start, end));
 			start = end + 1;
 			end += increment;
-			if (end > limit) {end = limit; }
+			if (end > limit) {
+				end = limit;
+			}
 		}
 		// Launch all the threads to run in parallel
 		startTime = System.currentTimeMillis();
@@ -53,10 +59,14 @@ public class Main {
 
 		// Wait for all the threads to finish
 		for (int i = 0; i < numberOfCores; i++) {
-			try {primenessThreads.get(i).join();} catch(InterruptedException ex) {}
+			try {
+				primenessThreads.get(i).join();
+			} catch (InterruptedException ex) {
+			}
 		}
 		endTime = System.currentTimeMillis();
-		System.out.println(numberOfCores + " threaded: Total execution time: " + (endTime - startTime) + " milliseconds.");
+		System.out.println(
+				numberOfCores + " threaded: Total execution time: " + (endTime - startTime) + " milliseconds.");
 	}
 
 	public static int getNumberOfCores() {
