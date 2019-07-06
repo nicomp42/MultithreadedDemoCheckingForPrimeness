@@ -1,7 +1,7 @@
 /**
  * Bill Nicholson
  * nicholdw@ucmail.uc.edu
- * 
+ * https://primes.utm.edu/curios/index.php?start=11&stop=16
  * https://primes.utm.edu
  */
 package multithreadedDemoCheckingForPrimeness;
@@ -17,7 +17,8 @@ public class Main {
 	public static void demo() {
 
 //		final long aPrimeNumber = 2764787846358431197L;
-		final long aPrimeNumber = 5915587277L;
+//		final long aPrimeNumber = 5915587277L;
+		final long aPrimeNumber = 100123456789L;
 		long startTime = System.currentTimeMillis();
 		Boolean thisPartIsPrime = true;
 		for (long i = 3; i <= aPrimeNumber; i += 2) {
