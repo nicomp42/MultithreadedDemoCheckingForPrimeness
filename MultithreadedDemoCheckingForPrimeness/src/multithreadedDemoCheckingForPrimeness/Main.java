@@ -13,27 +13,20 @@ public class Main {
 	public static void main(String[] args) {
 		// final long aPrimeNumber = 2764787846358431197L; // This takes forever on the single-threaded path
 		// final long aPrimeNumber = 10000019L;
-		final long aPrimeNumber = 5915587277L;
-		// final long aPrimeNumber = 100123456789L;
+		//final long aPrimeNumber = 5915587277L;
+	 final long aPrimeNumber = 100123456789L;
 		demo(true, aPrimeNumber);
 	}
 
 	public static void demo(Boolean runSingleThreadedExample, long aPrimeNumber) {
 
 		long startTime, endTime;
-		long limit = aPrimeNumber / 2;		// There is a better way to optimize this upper bound
+		long limit = aPrimeNumber / 2;		// There is a better way to optimize this upper bound...
 		if (runSingleThreadedExample) {
 			startTime = System.currentTimeMillis();
-			Boolean thisPartIsPrime = true;
-			for (long i = 3; i <= limit; i += 2) {
-				if (aPrimeNumber % i == 0) {
-					thisPartIsPrime = false; // We found a divisor. The number is not prime. Give up. Sigh.
-					break;
-				}
-			}
+			Boolean isPrime = PartialPrimeChecker.checkForPartialPrimeness(aPrimeNumber, 3,  limit);
 			endTime = System.currentTimeMillis();
-			System.out.println("Result = " + thisPartIsPrime + ", Single threaded: Total execution time: "
-					+ (endTime - startTime) + " milliseconds.");
+			System.out.println("Result = " + isPrime + ", Single threaded: Total execution time: " + (endTime - startTime) + " milliseconds.");
 		}
 		// Try it with however many cores are available.
 		System.out.println("This machine has " + getNumberOfCores() + " cores.");
@@ -54,7 +47,7 @@ public class Main {
 		// Launch all the threads to run in parallel
 		startTime = System.currentTimeMillis();
 		for (int i = 0; i < numberOfCores; i++) {
-			primenessThreads.get(i).run();
+			primenessThreads.get(i).start();
 		}
 
 		// Wait for all the threads to finish

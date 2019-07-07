@@ -1,3 +1,7 @@
+/**
+ * Bill Nicholson
+ * nicholdw@ucmail.uc.edu
+ */
 package multithreadedDemoCheckingForPrimeness;
 
 public class PrimessThread extends Thread {
@@ -9,6 +13,7 @@ public class PrimessThread extends Thread {
 	private long num, start, end;
 	private Boolean thisPartIsPrime;
 	private int threadNumber;
+	private long i;
 
 	public PrimessThread(int threadNumber, long num, long start, long end) {
 		this.start = start;
@@ -21,13 +26,7 @@ public class PrimessThread extends Thread {
 	@Override
 	public void run() {
 		System.out.println("Thread Number " + threadNumber + ": Starting thread from " + start + " to " + end);
-		thisPartIsPrime = true;	// Assume the best
-		for (long i = start; i <= end; i += 2) {
-			if (num % start == 0) {
-				thisPartIsPrime = false;	// We found a divisor. The number is not prime. Give up. Sigh.
-				break;
-			}
-		}
+		thisPartIsPrime = PartialPrimeChecker.checkForPartialPrimeness(num,  start, end);
 		System.out.println("Thread Number " + threadNumber + ": Result = " + thisPartIsPrime + ", number = " + num + ", thread counted from " + start + " to " + end);
 	}
 	/***
