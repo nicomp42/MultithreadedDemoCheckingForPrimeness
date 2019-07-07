@@ -125,3 +125,22 @@ public class Main {
 		return processors;
 	}
 }
+/*
+Checking 5915587277 for primeness...
+Result = true, Single threaded: Total execution time: 125116 milliseconds.
+This machine has 8 cores.
+Thread Number 1: Starting thread from 3 to 492965609
+Thread Number 3: Starting thread from 985931216 to 1478896821
+Thread Number 2: Starting thread from 492965610 to 985931215
+Thread Number 5: Starting thread from 1971862428 to 2464828033
+Thread Number 4: Starting thread from 1478896822 to 1971862427
+Thread Number 6: Starting thread from 2464828034 to 2957793638
+Thread Number 5: Result = true, number = 5915587277, thread counted from 1971862428 to 2464828033
+Thread Number 6: Result = true, number = 5915587277, thread counted from 2464828034 to 2957793638
+Thread Number 4: Result = true, number = 5915587277, thread counted from 1478896822 to 1971862427
+Thread Number 3: Result = true, number = 5915587277, thread counted from 985931216 to 1478896821
+Thread Number 2: Result = true, number = 5915587277, thread counted from 492965610 to 985931215
+Thread Number 1: Result = true, number = 5915587277, thread counted from 3 to 492965609
+6 threaded: Total execution time: 49435 milliseconds.
+*/
+
