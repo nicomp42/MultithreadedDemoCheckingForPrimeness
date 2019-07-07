@@ -4,20 +4,23 @@
  */
 package multithreadedDemoCheckingForPrimeness;
 
-public class PrimessThread extends Thread {
+import java.math.BigInteger;
+
+public class PrimenessThreadBigInteger extends Thread {
+
 	/**
 	 * Check a number for primeness, but just part of it.
-	 *
+	 * Uses the BigInteger class so we can process big honking numbers
 	 */
 
-	private long num, start, end;
+	private BigInteger num, start, end;
 	private Boolean thisPartIsPrime;
 	private int threadNumber;
 
-	public PrimessThread(int threadNumber, long num, long start, long end) {
-		this.start = start;
-		this.end = end;
-		this.num = num;
+	public PrimenessThreadBigInteger(int threadNumber, BigInteger num, BigInteger start, BigInteger end) {
+		this.start = new BigInteger(start.toByteArray());
+		this.end = new BigInteger(end.toByteArray());
+		this.num = new BigInteger(num.toByteArray());
 		thisPartIsPrime = false;
 		this.threadNumber = threadNumber;
 	}
