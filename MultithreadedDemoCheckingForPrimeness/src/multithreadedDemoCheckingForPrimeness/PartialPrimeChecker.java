@@ -38,8 +38,9 @@ public class PartialPrimeChecker {
 		Boolean thisPartIsPrime = true;	// Assume the best
 		while (true) {
 //		for (long i = start; i <= end; i += 2) {
-			if (num.mod(start).compareTo(BigInteger.ZERO) == 0) {
+			if (num.mod(i).compareTo(BigInteger.ZERO) == 0) {
 				thisPartIsPrime = false;	// We found a divisor. The number is not prime. Give up. Sigh.
+				System.out.println("Checking " + num.toString() + ", divisor found at " + i.toString());
 				break;
 			}
 			i = i.add(two);

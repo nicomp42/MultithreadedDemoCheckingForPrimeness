@@ -17,7 +17,8 @@ public class Main {
 		//final long aPrimeNumber = 5915587277L;
 		//final long aPrimeNumber = 100123456789L;
 		//demo(true, aPrimeNumber);
-		final BigInteger aPrimeNumber = new BigInteger("2764787846358431197"); // This takes forever on the single-threaded path
+		final BigInteger aPrimeNumber = new BigInteger("5915587277");
+		//final BigInteger aPrimeNumber = new BigInteger("2764787846358431197"); // This takes forever on the single-threaded path
 		// final long aPrimeNumber = 10000019L;
 		//final long aPrimeNumber = 5915587277L;
 		//final long aPrimeNumber = 100123456789L;
@@ -30,6 +31,7 @@ public class Main {
 	 */
 	public static void demo(Boolean runSingleThreadedExample, long aPrimeNumber) {
 		System.out.println("This is the demo using long integers");
+		System.out.println("Checking " + aPrimeNumber + " for primeness...");
 		long startTime, endTime;
 		long limit = aPrimeNumber / 2;		// There is a better way to optimize this upper bound...
 		if (runSingleThreadedExample) {
@@ -77,11 +79,12 @@ public class Main {
 	 */
 	public static void demo(Boolean runSingleThreadedExample, BigInteger aPrimeNumber) {
 		System.out.println("This is the demo using the BigInteger class");
+		System.out.println("Checking " + aPrimeNumber.toString() + " for primeness...");
 		long startTime, endTime;
 		BigInteger limit = aPrimeNumber.divide(new BigInteger("2"));		// There is a better way to optimize this upper bound...
 		if (runSingleThreadedExample) {
 			startTime = System.currentTimeMillis();
-			Boolean isPrime = PartialPrimeChecker.checkForPartialPrimeness(aPrimeNumber, new BigInteger("2"),  limit);
+			Boolean isPrime = PartialPrimeChecker.checkForPartialPrimeness(aPrimeNumber, new BigInteger("3"),  limit);
 			endTime = System.currentTimeMillis();
 			System.out.println("Result = " + isPrime + ", Single threaded: Total execution time: " + (endTime - startTime) + " milliseconds.");
 		}
