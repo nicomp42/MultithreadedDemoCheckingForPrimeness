@@ -17,7 +17,7 @@ public class Main {
 		//final long aPrimeNumber = 5915587277L;
 		//final long aPrimeNumber = 100123456789L;
 		//demo(true, aPrimeNumber);
-		final BigInteger aPrimeNumber = new BigInteger("5915587277");
+		final BigInteger aPrimeNumber = new BigInteger("100123456789");
 		//final BigInteger aPrimeNumber = new BigInteger("2764787846358431197"); // This takes forever on the single-threaded path
 		// final long aPrimeNumber = 10000019L;
 		//final long aPrimeNumber = 5915587277L;
@@ -142,5 +142,26 @@ Thread Number 3: Result = true, number = 5915587277, thread counted from 9859312
 Thread Number 2: Result = true, number = 5915587277, thread counted from 492965610 to 985931215
 Thread Number 1: Result = true, number = 5915587277, thread counted from 3 to 492965609
 6 threaded: Total execution time: 49435 milliseconds.
+
+====================================================================================================
+This is the demo using the BigInteger class
+Checking 100123456789 for primeness...
+Result = true, Single threaded: Total execution time: 4491780 milliseconds.
+This machine has 8 cores.
+Thread Number 1: Starting thread from 3 to 8343621402
+Thread Number 3: Starting thread from 16687242802 to 25030864200
+Thread Number 2: Starting thread from 8343621403 to 16687242801
+Thread Number 6: Starting thread from 41718106999 to 50061728394
+Thread Number 5: Starting thread from 33374485600 to 41718106998
+Thread Number 4: Starting thread from 25030864201 to 33374485599
+Thread Number 1: Result = true, number = 100123456789, thread counted from 3 to 8343621402
+Thread Number 4: Result = true, number = 100123456789, thread counted from 25030864201 to 33374485599
+Thread Number 3: Result = true, number = 100123456789, thread counted from 16687242802 to 25030864200
+Thread Number 6: Result = true, number = 100123456789, thread counted from 41718106999 to 50061728394
+Thread Number 5: Result = true, number = 100123456789, thread counted from 33374485600 to 41718106998
+Thread Number 2: Result = true, number = 100123456789, thread counted from 8343621403 to 16687242801
+6 threaded: Total execution time: 1224723 milliseconds.
+
+
 */
 
